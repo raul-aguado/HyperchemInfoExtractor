@@ -2,7 +2,9 @@ Hyperchem Info Extractor (HIE) is a tool developed to work with Hyperchem (Hyper
 It provides a rapid way to extrct the information of Hyperchem logs
 
 HIE 1.0 (on-screen) will display on the screen the information wich has been selected by the user (Energies, ZPE, molecular symmetry and molecular orbitals [including orbitals with alfa-beta label by MP2 correlation])
+
 HIE 2.1.1 (on-file) will create a file with the energies of the molecules studied. The program will search on all .log and .txt files for this information and will write it down on a txt file
+
 
 The program is in spanish. Soon I will translate it! :D
 
