@@ -1,0 +1,8 @@
+###############################
+Hyperchem Info Extractor (HIE)
+###############################
+
+CHANGELOG:
+
+2.1.1: Base version of HIE
+2.1.2: Corrected an error that causes the program to print the same data for all files in the folder
