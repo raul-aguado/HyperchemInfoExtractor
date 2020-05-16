@@ -101,7 +101,6 @@ for fp in filepaths:
                     m=n+8
                     n=n+1
                     while n<m:
-                        print(n)
                         file.write(mylines[n] + os.linesep)
                         n=n+1
             if bo2==1:
@@ -112,7 +111,6 @@ for fp in filepaths:
                     m=n+3
                     n=n+1
                     while n<m:
-                        print(n)
                         file.write(mylines[n] + os.linesep)
                         n=n+1
         
@@ -149,7 +147,6 @@ for fp in filepaths:
                         m=n+8
                         n=n+1
                         while n<m:
-                            print(n)
                             file.write(mylines[n] + os.linesep)
                             n=n+1
                 if bo2==1:
