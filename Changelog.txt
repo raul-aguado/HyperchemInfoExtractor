@@ -2,9 +2,10 @@
 Hyperchem Info Extractor (HIE)
 ###############################
 
-CHANGELOG:
+CHANGE-LOG:
 
 2.1.1: Base version of HIE
 2.1.2: Corrected an error that causes the program to print the same data for all files in the folder
 
-2.2.1: Now, the user can select the information that has to be extracted from the files (energies, ZPE and/or molecular symmetry) 
+2.2.1: Now, the user can select the information that has to be extracted from the files (energies, ZPE and/or molecular symmetry)
+2.2.2: Added exception handling

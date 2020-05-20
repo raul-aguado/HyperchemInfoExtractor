@@ -9,11 +9,11 @@ def indexador_archivos(ruta=getcwd()):
 
 #La promosió 1
 def info_creador():
-    print("#######################################################")
-    print("Resumen generado mediante Hyperchem File Extractor 2.2")
+    print("########################################################")
+    print("Resumen generado mediante Hyperchem File Extractor 2.2.2")
     print()
-    print("Creado por Raul Aguado                             2020")
-    print("#######################################################")
+    print("Creado por Raul Aguado                              2020")
+    print("########################################################")
     print()
     print()
 
@@ -70,11 +70,11 @@ print("En la carpeta existen " + str(num_archivos) + " arhivos")
 time.sleep(1)
 
 #La promosió 2
-file.write("#######################################################" + os.linesep)
-file.write("Resumen generado mediante Hyperchem File Extractor 2.2" + os.linesep)
+file.write("########################################################" + os.linesep)
+file.write("Resumen generado mediante Hyperchem File Extractor 2.2.2" + os.linesep)
 file.write(os.linesep)
 file.write("Creado por Raul Aguado                             2020" + os.linesep)
-file.write("#######################################################" + os.linesep)
+file.write("########################################################" + os.linesep)
 file.write(os.linesep)
 
 #Se crea la lista que va a contener las lineas del archivo que se esta analizando (fp)
@@ -84,7 +84,7 @@ for fp in filepaths:
     ext = os.path.splitext(fp)[-1].lower()
     ruta_completa=ruta+"/"+fp
 
-    # Now we can simply use == to check for equality, no need for wildcards.
+    # Si el archivo es un log, se analiza
     if ext == ".log":
         print()
         print(fp+" es un archivo .log!")
@@ -106,33 +106,47 @@ for fp in filepaths:
             file.write("==========" + os.linesep)
 
             if bo1==1:
-                n=0
-                while mylines[n]!="ENERGIES AND GRADIENT\n":
-                    n=n+1
-                else:
-                    m=n+8
-                    n=n+1
-                    while n<m:
-                        print(n)
-                        file.write(mylines[n] + os.linesep)
+                try:
+                    n=0
+                    while mylines[n]!="ENERGIES AND GRADIENT\n":
                         n=n+1
-            if bo2==1:
-                n=0
-                while mylines[n]!="         ==== Zero Point Energy of Vibration in kcal / mol ====\n":
-                    n=n+1
-                else:
-                    file.write("Zero point energy: "+mylines[n+2] + " (kcal/mol)" + os.linesep)
-            if bo3==1:
-                n=0
-                while mylines[n]!="MOLECULAR POINT GROUP\n":
-                    n=n+1
-                else:
-                    m=n+3
-                    n=n+1
-                    while n<m:
-                        file.write(mylines[n] + os.linesep)
+                    else:
+                        m=n+8
                         n=n+1
+                        while n<m:
+                            file.write(mylines[n] + os.linesep)
+                            n=n+1
+                except:
+                    print("No se ha encontrado ningun dato sobre la energía")
+                    print("Continuando...")
+                    print()
 
+            if bo2==1:
+                try:
+                    n=0
+                    while mylines[n]!="         ==== Zero Point Energy of Vibration in kcal / mol ====\n":
+                        n=n+1
+                    else:
+                        file.write("Zero point energy: "+mylines[n+2] + " (kcal/mol)" + os.linesep)
+                except:
+                    print("No se ha encontrado ningun dato sobre ZPE")
+                    print("Continuando...")
+                    print()
+            if bo3==1:
+                try:
+                    n=0
+                    while mylines[n]!="MOLECULAR POINT GROUP\n":
+                        n=n+1
+                    else:
+                        m=n+3
+                        n=n+1
+                        while n<m:
+                            file.write(mylines[n] + os.linesep)
+                            n=n+1
+                except:
+                    print("No se ha encontrado ningun dato de simetria molecular")
+                    print("Continuando...")
+                    print()
         time.sleep(4)
 
     #Si el archivo es un .txt podria contener informacion de Hyperchem
