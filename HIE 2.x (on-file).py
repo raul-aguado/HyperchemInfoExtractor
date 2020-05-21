@@ -8,9 +8,9 @@ def indexador_archivos(ruta=getcwd()):
     return[arch.name for arch in scandir(ruta) if arch.is_file()]
 
 #La promosió 1
-def info_creador():
+def banner():
     print("########################################################")
-    print("Resumen generado mediante Hyperchem File Extractor 2.2.2")
+    print("Resumen generado mediante Hyperchem Info Extractor 2.2.3")
     print()
     print("Creado por Raul Aguado                              2020")
     print("########################################################")
@@ -18,7 +18,7 @@ def info_creador():
     print()
 
 #Inicio del programa
-info_creador()
+banner()
 
 
 #Preguntar por la ruta que hay que comprobar
@@ -52,8 +52,21 @@ while str(opt3)!="y" or "n":
         bo3=0
         break
 
+#Se pide la ruta que se debe comprobar y se pregunta si se quiere renombrar el archivo de salida de datos
 print()
 ruta=input("Introduce la ruta para comprobar: ")
+print()
+print("¿Quieres seleccionar un nombre para tu archivo de salida?")
+output_opt=""
+while str(output_opt)!="y" or "n":
+    output_opt=str(input("y/n... "))
+    if output_opt=="y":
+        print()
+        nom_resumen=(input("Nombre del output... "))
+        break
+    if opt3=="n":
+        nom_resumen="Resumen Hyperchem"
+        break
 print()
 print("Buscando archivos de registro en la ruta selecionada...")
 print()
@@ -61,7 +74,7 @@ time.sleep(1)
 print()
 
 #Se crea el archivo que va a contener nuestro resumencito
-file = open(ruta+"/Resumen Hyperchem.txt", "w")
+file = open(ruta+"/" + nom_resumen + ".txt", "w")
 
 #Se indexan todos los archivos de la carpeta mediante la funcion definida antes
 filepaths = (indexador_archivos(ruta))
@@ -71,7 +84,7 @@ time.sleep(1)
 
 #La promosió 2
 file.write("########################################################" + os.linesep)
-file.write("Resumen generado mediante Hyperchem File Extractor 2.2.2" + os.linesep)
+file.write("Resumen generado mediante Hyperchem Info Extractor 2.2.3" + os.linesep)
 file.write(os.linesep)
 file.write("Creado por Raul Aguado                             2020" + os.linesep)
 file.write("########################################################" + os.linesep)
@@ -118,6 +131,7 @@ for fp in filepaths:
                             n=n+1
                 except:
                     print("No se ha encontrado ningun dato sobre la energía")
+                    file.write("No se ha encontrado ningun dato sobre la energía"+ os.linesep)
                     print("Continuando...")
                     print()
 
@@ -130,6 +144,7 @@ for fp in filepaths:
                         file.write("Zero point energy: "+mylines[n+2] + " (kcal/mol)" + os.linesep)
                 except:
                     print("No se ha encontrado ningun dato sobre ZPE")
+                    file.write("No se ha encontrado ningun dato sobre ZPE"+ os.linesep)
                     print("Continuando...")
                     print()
             if bo3==1:
@@ -145,6 +160,7 @@ for fp in filepaths:
                             n=n+1
                 except:
                     print("No se ha encontrado ningun dato de simetria molecular")
+                    file.write("No se ha encontrado ningun dato de simetria molecular"+ os.linesep)
                     print("Continuando...")
                     print()
         time.sleep(4)
@@ -152,7 +168,7 @@ for fp in filepaths:
     #Si el archivo es un .txt podria contener informacion de Hyperchem
     elif ext == ".txt":
         #Con la siguiente linea se evita que el programa analice el propio resumen
-        if fp!="Resumen Hyperchem.txt":
+        if fp!=(nom_resumen + ".txt"):
             print(fp+" es un archivo de texto!")
             print()
             print("Contiene " + fp + " datos de Hyperchem?")
