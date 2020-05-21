@@ -9,5 +9,4 @@ CHANGE-LOG:
 
 2.2.1: Now, the user can select the information that has to be extracted from the files (energies, ZPE and/or molecular symmetry)
 2.2.2: Added exception handling
-2.2.2: User can now select a name for the output file
 2.2.3: User can now select a name for the output file. Added information about exceptions on output file
